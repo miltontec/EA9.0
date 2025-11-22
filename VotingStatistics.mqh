@@ -63,12 +63,14 @@ struct MarketEmotion {
     double greed;          // Nivel de codicia (0-1)
     double uncertainty;    // Nivel de incertidumbre (0-1)
     double excitement;     // Nivel de excitación (0-1)
+    datetime timestamp;    // Timestamp de actualización
 
     void Initialize() {
         fear = 0.5;
         greed = 0.5;
         uncertainty = 0.5;
         excitement = 0.5;
+        timestamp = 0;
     }
 };
 

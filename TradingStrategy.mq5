@@ -897,15 +897,15 @@ void SynchronizeAllSystems()
     if(g_metaLearning != NULL && g_votingStats != NULL)
     {
         // Asegurar que las tasas de éxito coincidan
-        // TODO: Método no existe - double globalSuccessRate = // TODO: Método no existe - g_votingStats.GetSuccessRate();
-        double mlSuccessRate = g_metaLearning.GetConsensusSuccessRate();
-        
-        if(MathAbs(globalSuccessRate - mlSuccessRate) > 0.1)
-        {
-            Print("⚠️ Discrepancia en tasas de éxito: VS ", 
-                  DoubleToString(globalSuccessRate * 100, 1), "% vs ML ",
-                  DoubleToString(mlSuccessRate * 100, 1), "%");
-        }
+        //         // TODO: Método no existe - double globalSuccessRate = // TODO: Método no existe - g_votingStats.GetSuccessRate();
+        //         double mlSuccessRate = g_metaLearning.GetConsensusSuccessRate();
+        //         
+        //         if(MathAbs(globalSuccessRate - mlSuccessRate) > 0.1)
+        //         {
+        //             Print("⚠️ Discrepancia en tasas de éxito: VS ", 
+        //                   DoubleToString(globalSuccessRate * 100, 1), "% vs ML ",
+        //                   DoubleToString(mlSuccessRate * 100, 1), "%");
+        //         }
     }
     
     Print("✓ Sistemas sincronizados");
@@ -2163,8 +2163,7 @@ void OnRegimeChange(ENUM_MARKET_REGIME oldRegime, ENUM_MARKET_REGIME newRegime)
         if(g_regimeDetector != NULL)
         {
             double winRate = 0.0;
-            if(g_votingStats != NULL)
-                // TODO: Método no existe - winRate = // TODO: Método no existe - g_votingStats.GetSuccessRate();
+            // TODO: Método no existe - if(g_votingStats != NULL) winRate = g_votingStats.GetSuccessRate();
             
             // Crear estructura de historial
             //             RegimeHistory history;
@@ -3934,8 +3933,7 @@ void UpdateCycleStatus()
     else
     {
         g_currentCycle.activeDirection = VOTE_NONE;
-        if(g_votingStats != NULL)
-            // TODO: Método no existe - g_votingStats.SetDirectionLock(VOTE_NONE);
+        // TODO: Método no existe - if(g_votingStats != NULL) g_votingStats.SetDirectionLock(VOTE_NONE);
     }
     
     // Actualizar régimen actual
