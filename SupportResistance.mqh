@@ -1,11 +1,6 @@
 // --- Robustez frente a ruido en movimientos ---
 // Evitar falsos SR priorizando movimientos más amplios
 // Ajuste por defecto alineado con SupportResistance.mqh
-#ifndef MIN_MOVEMENT_BARS
-#ifndef MIN_MOVEMENT_BARS
-#define MIN_MOVEMENT_BARS 5
-#endif
-#endif
 
 //+------------------------------------------------------------------+
 //|                                    SupportResistance_v4.mqh      |

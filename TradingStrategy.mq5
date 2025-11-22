@@ -1,4 +1,4 @@
-﻿﻿//+------------------------------------------------------------------+
+//+------------------------------------------------------------------+
 //|                      TradingStrategy_NCN_v15_Fixed.mq5           |
 //|                Neural Consensus Network - Versión Corregida      |
 //|              Integración completa con flujo simplificado         |
