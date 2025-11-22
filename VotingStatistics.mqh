@@ -72,6 +72,29 @@ struct MarketEmotion {
     }
 };
 
+// Estructura de Contexto de Decisión
+struct DecisionContext {
+    datetime timestamp;
+    double atr;
+    double momentum;
+    double volatility;
+    int session;
+    double market_strength;
+    bool high_confidence;
+    string context_description;
+
+    void Initialize() {
+        timestamp = 0;
+        atr = 0.0;
+        momentum = 0.0;
+        volatility = 0.0;
+        session = 0;
+        market_strength = 0.0;
+        high_confidence = false;
+        context_description = "";
+    }
+};
+
 // Estructura de Memoria de Consenso
 struct ConsensusMemory {
     ulong consensus_id;
@@ -153,29 +176,6 @@ struct NeuralConsensusResult {
         veto_used = false;
         consensus_id = 0;
         market_emotion.Initialize();
-    }
-};
-
-// Estructura de Contexto de Decisión
-struct DecisionContext {
-    datetime timestamp;
-    double atr;
-    double momentum;
-    double volatility;
-    int session;
-    double market_strength;
-    bool high_confidence;
-    string context_description;
-
-    void Initialize() {
-        timestamp = 0;
-        atr = 0.0;
-        momentum = 0.0;
-        volatility = 0.0;
-        session = 0;
-        market_strength = 0.0;
-        high_confidence = false;
-        context_description = "";
     }
 };
 
