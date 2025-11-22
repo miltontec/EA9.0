@@ -83,6 +83,16 @@ struct DecisionContext {
     bool high_confidence;
     string context_description;
 
+    // Campos adicionales para TradingStrategy
+    double rsi;
+    double volume_ratio;
+    int session_type;
+    double atr_ratio;
+    double fear_level;
+    double greed_level;
+    int active_orders;
+    int locked_direction;
+
     void Initialize() {
         timestamp = 0;
         atr = 0.0;
@@ -92,6 +102,14 @@ struct DecisionContext {
         market_strength = 0.0;
         high_confidence = false;
         context_description = "";
+        rsi = 50.0;
+        volume_ratio = 1.0;
+        session_type = 0;
+        atr_ratio = 1.0;
+        fear_level = 0.5;
+        greed_level = 0.5;
+        active_orders = 0;
+        locked_direction = 0;
     }
 };
 

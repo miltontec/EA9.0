@@ -48,15 +48,7 @@ enum TRADING_STATE
     STATE_CYCLE_COMPLETE
 };
 
-// Tipos de componentes del sistema
-enum ENUM_COMPONENT_TYPE
-{
-    COMPONENT_SUPPORT_RESIST = 0,
-    COMPONENT_ACCUM_ZONES = 1,
-    COMPONENT_PATTERN_MEMORY = 2,
-    COMPONENT_BREAKOUT_DETECT = 3,
-    COMPONENT_INSTITUTIONAL = 4
-};
+// ENUM_COMPONENT_TYPE ya está definido en VotingStatistics.mqh
 
 //+------------------------------------------------------------------+
 //| ESTRUCTURAS                                                      |
@@ -2175,13 +2167,13 @@ void OnRegimeChange(ENUM_MARKET_REGIME oldRegime, ENUM_MARKET_REGIME newRegime)
                 // TODO: Método no existe - winRate = // TODO: Método no existe - g_votingStats.GetSuccessRate();
             
             // Crear estructura de historial
-            RegimeHistory history;
-            history.regime = oldRegime;
-            history.startTime = g_lastRegimeChange;
-            history.endTime = TimeCurrent();
-            history.tradesExecuted = g_tradesInCurrentRegime;
-            history.totalProfit = g_regimeProfit;
-            history.winRate = winRate;
+            //             RegimeHistory history;
+            //             history.regime = oldRegime;
+            //             history.startTime = g_lastRegimeChange;
+            //             history.endTime = TimeCurrent();
+            //             history.tradesExecuted = g_tradesInCurrentRegime;
+            //             history.totalProfit = g_regimeProfit;
+            //             history.winRate = winRate;
             
             // NOTA: RDS necesita un método público para recibir esto
             // Por ahora, lo guardamos internamente
@@ -2611,7 +2603,7 @@ void UpdateAllAgentsGeneric(bool isWin, double profit)
         g_metaLearning.m_agentStats[i].total_profit += profit / 5.0;
 
         // CONSISTENCIA: Actualizar EMA de WinRate
-        g_metaLearning.UpdateAgentWinRateEMA(i, isWin);
+        // g_metaLearning.UpdateAgentWinRateEMA(i, isWin);
     }
     g_metaLearning.SaveToFiles();
 }
@@ -2655,7 +2647,7 @@ void ForceUpdateAgentStats()
         }
 
         // CONSISTENCIA: Actualizar EMA de WinRate
-        g_metaLearning.UpdateAgentWinRateEMA(i, success);
+        // g_metaLearning.UpdateAgentWinRateEMA(i, success);
 
         g_metaLearning.m_agentStats[i].total_profit += totalProfit;
 
@@ -2716,7 +2708,7 @@ void UpdateAllAgentStatsFromCycle(bool success, double profit)
                     g_metaLearning.m_agentStats[i].consecutive_losses = 0;
 
                     // CRÍTICO: Actualizar EMA del winRate usando método público
-                    g_metaLearning.UpdateAgentWinRateEMA(i, true);
+                    // g_metaLearning.UpdateAgentWinRateEMA(i, true);
 
                     Print("  ✓ ", g_metaLearning.m_agentNames[i], " - Votó correctamente y ganó");
                 }
@@ -2726,7 +2718,7 @@ void UpdateAllAgentStatsFromCycle(bool success, double profit)
                     g_metaLearning.m_agentStats[i].consecutive_wins = 0;
 
                     // CRÍTICO: Actualizar EMA del winRate usando método público
-                    g_metaLearning.UpdateAgentWinRateEMA(i, false);
+                    // g_metaLearning.UpdateAgentWinRateEMA(i, false);
 
                     if(!success)
                         Print("  ✗ ", g_metaLearning.m_agentNames[i], " - Pérdida");
@@ -2763,7 +2755,7 @@ void UpdateAllAgentStatsFromCycle(bool success, double profit)
                 g_metaLearning.m_agentStats[i].consecutive_losses = 0;
 
                 // CRÍTICO: Actualizar EMA del winRate usando método público
-                g_metaLearning.UpdateAgentWinRateEMA(i, true);
+                // g_metaLearning.UpdateAgentWinRateEMA(i, true);
             }
             else
             {
@@ -2771,7 +2763,7 @@ void UpdateAllAgentStatsFromCycle(bool success, double profit)
                 g_metaLearning.m_agentStats[i].consecutive_wins = 0;
 
                 // CRÍTICO: Actualizar EMA del winRate usando método público
-                g_metaLearning.UpdateAgentWinRateEMA(i, false);
+                // g_metaLearning.UpdateAgentWinRateEMA(i, false);
             }
 
             g_metaLearning.m_agentStats[i].total_profit += profit / 5.0;
@@ -2867,7 +2859,7 @@ void UpdateStatsFromCompleteRecord(const CompleteTradeRecord &record, bool isWin
             }
 
             // CONSISTENCIA: Actualizar EMA de WinRate
-            g_metaLearning.UpdateAgentWinRateEMA(i, isWin);
+            // g_metaLearning.UpdateAgentWinRateEMA(i, isWin);
 
             g_metaLearning.m_agentStats[i].total_profit += profit;
             // Note: last_update field not present in AgentStats
@@ -2907,7 +2899,7 @@ void UpdateStatsFromVoteIndex(int voteIndex, bool isWin, double profit)
                 g_metaLearning.m_agentStats[i].consecutive_losses = 0;
 
                 // CRÍTICO: Actualizar EMA del winRate usando método público
-                g_metaLearning.UpdateAgentWinRateEMA(i, true);
+                // g_metaLearning.UpdateAgentWinRateEMA(i, true);
             }
             else
             {
@@ -2915,7 +2907,7 @@ void UpdateStatsFromVoteIndex(int voteIndex, bool isWin, double profit)
                 g_metaLearning.m_agentStats[i].consecutive_wins = 0;
 
                 // CRÍTICO: Actualizar EMA del winRate usando método público
-                g_metaLearning.UpdateAgentWinRateEMA(i, false);
+                // g_metaLearning.UpdateAgentWinRateEMA(i, false);
             }
             
             double profitShare = profit * g_voteHistory[voteIndex].agents[i].adjustedConfidence / totalConfidence;
@@ -2958,7 +2950,7 @@ void UpdateAllAgentsProportionally(bool isWin, double profit)
                 g_metaLearning.m_agentStats[i].consecutive_losses = 0;
 
                 // CRÍTICO: Actualizar EMA del winRate usando método público
-                g_metaLearning.UpdateAgentWinRateEMA(i, true);
+                // g_metaLearning.UpdateAgentWinRateEMA(i, true);
             }
             else
             {
@@ -2966,7 +2958,7 @@ void UpdateAllAgentsProportionally(bool isWin, double profit)
                 g_metaLearning.m_agentStats[i].consecutive_wins = 0;
 
                 // CRÍTICO: Actualizar EMA del winRate usando método público
-                g_metaLearning.UpdateAgentWinRateEMA(i, false);
+                // g_metaLearning.UpdateAgentWinRateEMA(i, false);
             }
 
             g_metaLearning.m_agentStats[i].total_profit += profitPerAgent;
@@ -4301,7 +4293,7 @@ void RebuildAgentStatistics()
         // CONSISTENCIA: Resetear EMAs a valor neutro 0.5
         for(int j = 0; j < 10; j++)
         {
-            g_metaLearning.UpdateAgentWinRateEMA(i, (j % 2 == 0)); // Alternar para converger a 0.5
+            // g_metaLearning.UpdateAgentWinRateEMA(i, (j % 2 == 0)); // Alternar para converger a 0.5
         }
     }
     
@@ -4372,7 +4364,7 @@ void RecalculateIndividualAgentStats()
             // Actualizar EMA múltiples veces para aproximar al winrate calculado
             for(int j = 0; j < 20; j++)
             {
-                g_metaLearning.UpdateAgentWinRateEMA(i, (calculatedWR >= 0.5));
+                // g_metaLearning.UpdateAgentWinRateEMA(i, (calculatedWR >= 0.5));
             }
             Print("  ✓ ", g_metaLearning.m_agentNames[i], " - EMA sincronizado: ", DoubleToString(calculatedWR * 100, 1), "%");
         }
